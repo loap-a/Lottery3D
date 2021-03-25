@@ -18,6 +18,7 @@ if(isAvailable(user_input))
 {
 userNumber=StringtoIntArray(user_input);
 }
+else System.out.println("输入错误");
 }
 
 
@@ -65,6 +66,7 @@ class OneD extends Lottery3D
     public OneD(String win_number,String user_number)
     {
         super(win_number);
+        if(isAvailable(user_number))
         userNumber=toCharArray(user_number);
     }
     public char[]toCharArray(String s)
@@ -80,7 +82,16 @@ class OneD extends Lottery3D
     @Override
     public boolean isAvailable(String s)
     {
-        return super.isAvailable(s);
+        int count=0;
+        boolean temp=false;int n=s.length();
+        for(int i=0;i<n;i++)
+        {
+            if(s.charAt(i)>='0'&&s.charAt(i)<='9')temp=true;
+            if(s.charAt(i)=='*')count++;
+        }
+
+        if(count==2&&temp)return true;
+        else return false;
     }
 
     @Override
@@ -106,12 +117,14 @@ class Sum extends Lottery3D{
     public Sum(String win_number,String user_number)
     {
         super(win_number,user_number);
+        if(isAvailable(user_number))
         userNumber=StringtoIntArray(user_number);
     }
 
     @Override
     public boolean isAvailable(String s) {
-        return super.isAvailable(s);
+        if(s.length()==1&&s.charAt(0)>='0'&&s.charAt(0)<='9')return true;
+        else return false;
     }
 
     @Override
@@ -143,13 +156,15 @@ class Guess1D extends Lottery3D
     public Guess1D(String win_number,String user_number)
     {
         super(win_number,user_number);
+        if(isAvailable(user_number))
         userNumber=StringtoIntArray(user_number);
     }
 
     @Override
     public boolean isAvailable(String s)
     {
-    return super.isAvailable(s);
+        if(s.length()==1&&s.charAt(0)>='0'&&s.charAt(0)<='9')return true;
+        else return false;
     }
 
     @Override
@@ -176,12 +191,23 @@ class Single extends Lottery3D
     public Single (String win_number, String user_number)
     {
         super(win_number,user_number);
+        if(isAvailable(user_number))
         userNumber=StringtoIntArray(user_number);
     }
 
     @Override
     public boolean isAvailable(String s) {
-        return super.isAvailable(s);
+        boolean flag=true;
+        int n=s.length();
+        if(n!=3)return false;
+
+        for(int i=0;i<3;i++)
+        {
+            if(s.charAt(i)<'0'||s.charAt(i)>'9')
+                flag=false;
+        }
+
+        return flag;
     }
     @Override
   public int getWins()
@@ -206,12 +232,24 @@ private int[]userNumber;
     public Group(String win_number,String user_number)
     {
         super(win_number,user_number);
+        if(isAvailable(user_number))
         userNumber=StringtoIntArray(user_number);
     }
 
     @Override
     public boolean isAvailable(String s) {
-        return super.isAvailable(s);
+
+        boolean flag=true;
+        int n=s.length();
+        if(n!=3)return false;
+
+        for(int i=0;i<3;i++)
+        {
+            if(s.charAt(i)<'0'||s.charAt(i)>'9')
+                flag=false;
+        }
+
+        return flag;
     }
     @Override
     public int getWins()
@@ -274,6 +312,7 @@ class Towd extends Lottery3D
     public Towd(String win_number,String user_number)
     {
         super(win_number,user_number);
+        if(isAvailable(user_number))
         userNumber=StringToCharArray(user_number);
         winNumber=StringToCharArray(win_number);
 
@@ -291,7 +330,17 @@ class Towd extends Lottery3D
 
     @Override
     public boolean isAvailable(String s) {
-        return super.isAvailable(s);
+        int count1=0;int count2=0;
+        int n=s.length();
+        for(int i=0;i<n;i++)
+        {
+            if(s.charAt(i)>='0'&&s.charAt(i)<='9')count1++;
+            if(s.charAt(i)=='*')count2++;
+
+        }
+        if(count1==2&&count2==1&&n==3)return true;
+        else return false;
+
     }
 
     @Override
@@ -326,6 +375,7 @@ class Guess2D extends Lottery3D
     public Guess2D(String win_number,String user_number)
     {
         super(win_number,user_number);
+        if(isAvailable(user_number))
         userNumber=StringToCharArray(user_number);
         winNumber=StringToCharArray(win_number);
     }
@@ -342,7 +392,14 @@ class Guess2D extends Lottery3D
 
     @Override
     public boolean isAvailable(String s) {
-        return super.isAvailable(s);
+        int n=s.length();
+        int count=0;
+        for(int i=0;i<n;i++)
+        {
+            if(s.charAt(i)>='0'&&s.charAt(i)<='9')count++;
+        }
+        if(count==2&&n==2)return true;
+        else return false;
     }
 
     @Override
@@ -383,13 +440,24 @@ class General extends Lottery3D //通选
     public General(String win_number,String user_number)
     {
         super(win_number,user_number);
+        if(isAvailable(user_number))
         userNumber=StringtoIntArray(user_number);
         winNumber=StringtoIntArray(win_number);
     }
 
     @Override
     public boolean isAvailable(String s) {
-        return super.isAvailable(s);
+        boolean flag=true;
+        int n=s.length();
+        if(n!=3)return false;
+
+        for(int i=0;i<3;i++)
+        {
+            if(s.charAt(i)<'0'||s.charAt(i)>'9')
+                flag=false;
+        }
+
+        return flag;
     }
 
     @Override
@@ -419,13 +487,16 @@ class GuessBigOrSmall extends Lottery3D
     public GuessBigOrSmall(String win_number,String user_number)
     {
         super(win_number);
+        if(isAvailable(user_number))
         userNumber=user_number;
 
     }
 
     @Override
     public boolean isAvailable(String s) {
-        return super.isAvailable(s);
+        boolean flag=false;
+        if(s.equals("big")||s.equals("small"))flag=true;
+        return flag;
     }
 
     @Override
@@ -483,12 +554,17 @@ class GuessDoubleSingle extends Lottery3D
     public GuessDoubleSingle(String win_number,String user_number)
     {
         super(win_number);
+        if(isAvailable(user_number))
         userNumber=user_number;
     }
 
     @Override
     public boolean isAvailable(String s) {
-        return super.isAvailable(s);
+
+
+        boolean flag=false;
+        if(s.equals("single")||s.equals("double"))flag=true;
+        return flag;
     }
 
     @Override
@@ -549,7 +625,17 @@ private int[]userNumber;
 
     @Override
     public boolean isAvailable(String s) {
-        return super.isAvailable(s);
+        boolean flag=true;
+        int n=s.length();
+        if(n!=3)return false;
+
+        for(int i=0;i<3;i++)
+        {
+            if(s.charAt(i)<'0'||s.charAt(i)>'9')
+                flag=false;
+        }
+
+        return flag;
     }
 
     @Override
